@@ -12,6 +12,7 @@ public class ProjectRequest {
     private String mode;
     private String timeSignature;
     private Integer bpm;
+    private Double scale;
     private List<InstrumentDto> instruments;
 
     @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
@@ -19,6 +20,7 @@ public class ProjectRequest {
         private String name;
         private String type;
         private Integer sortOrder;
+        private Boolean hidden;
         private List<NoteDto> notes;
     }
 

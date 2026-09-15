@@ -32,6 +32,10 @@ public class Instrument {
     @Builder.Default
     private Integer sortOrder = 0;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Boolean hidden = false;
+
     @OneToMany(mappedBy = "instrument", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("sortOrder ASC")
     @Builder.Default

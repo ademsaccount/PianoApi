@@ -15,6 +15,7 @@ public class ProjectResponse {
     private String mode;
     private String timeSignature;
     private Integer bpm;
+    private Double scale;
     private Instant createdAt;
     private Instant updatedAt;
     private List<InstrumentResponse> instruments;
@@ -25,6 +26,7 @@ public class ProjectResponse {
         private String name;
         private String type;
         private Integer sortOrder;
+        private Boolean hidden;
         private List<NoteResponse> notes;
     }
 

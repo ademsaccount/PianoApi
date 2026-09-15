@@ -44,6 +44,10 @@ public class Project {
     @Builder.Default
     private Integer bpm = 120;
 
+    @Column(nullable = false)
+    @Builder.Default
+    private Double scale = 6.0;
+
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("sortOrder ASC")
     @Builder.Default

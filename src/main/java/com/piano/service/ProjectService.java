@@ -41,6 +41,7 @@ public class ProjectService {
                 .mode(req.getMode() != null ? req.getMode() : "major")
                 .timeSignature(req.getTimeSignature() != null ? req.getTimeSignature() : "4/4")
                 .bpm(req.getBpm() != null ? req.getBpm() : 120)
+                .scale(req.getScale() != null ? req.getScale() : 6.0)
                 .instruments(new ArrayList<>())
                 .build();
         projectRepo.save(project);
@@ -75,10 +76,14 @@ public class ProjectService {
         if (req.getMode() != null) project.setMode(req.getMode());
         if (req.getTimeSignature() != null) project.setTimeSignature(req.getTimeSignature());
         if (req.getBpm() != null) project.setBpm(req.getBpm());
+        if (req.getScale() != null) project.setScale(req.getScale());
 
         projectRepo.save(project);
 
         if (req.getInstruments() != null) {
+            instrumentRepo.deleteNotesByProjectId(projectId);
+            instrumentRepo.deleteByProjectId(projectId);
+            project.getInstruments().clear();
             for (var instReq : req.getInstruments()) {
                 saveInstrument(project, instReq, 1);
             }
@@ -129,6 +134,7 @@ public class ProjectService {
                 .name(instReq.getName() != null ? instReq.getName() : "Piano")
                 .type(instReq.getType() != null ? instReq.getType() : "grand")
                 .sortOrder(instReq.getSortOrder() != null ? instReq.getSortOrder() : defaultOrder)
+                .hidden(instReq.getHidden() != null ? instReq.getHidden() : false)
                 .notes(new ArrayList<>())
                 .build();
         instrumentRepo.save(instrument);
@@ -161,6 +167,7 @@ public class ProjectService {
                 .mode(p.getMode())
                 .timeSignature(p.getTimeSignature())
                 .bpm(p.getBpm())
+                .scale(p.getScale())
                 .createdAt(p.getCreatedAt())
                 .updatedAt(p.getUpdatedAt())
                 .instruments(List.of())
@@ -174,6 +181,7 @@ public class ProjectService {
                         .name(inst.getName())
                         .type(inst.getType())
                         .sortOrder(inst.getSortOrder())
+                        .hidden(inst.getHidden() != null ? inst.getHidden() : false)
                         .notes(inst.getNotes().stream()
                                 .map(n -> ProjectResponse.NoteResponse.builder()
                                         .id(n.getId())
@@ -198,6 +206,7 @@ public class ProjectService {
                 .mode(p.getMode())
                 .timeSignature(p.getTimeSignature())
                 .bpm(p.getBpm())
+                .scale(p.getScale())
                 .createdAt(p.getCreatedAt())
                 .updatedAt(p.getUpdatedAt())
                 .instruments(instruments)
