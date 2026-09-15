@@ -1,0 +1,9 @@
+{
+  "buildCommand": null,
+  "outputDirectory": null,
+  "framework": null,
+  "installCommand": null,
+  "git": {
+    "deploymentEnabled": true
+  }
+}
