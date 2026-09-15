@@ -1,0 +1,17 @@
+# --- Build Stage ---
+FROM maven:3.9-eclipse-temurin-21 AS build
+WORKDIR /app
+COPY pom.xml .
+RUN mvn -B dependency:go-offline
+COPY src ./src
+RUN mvn -B clean package -DskipTests
+
+# --- Runtime Stage ---
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+COPY --from=build /app/target/*.jar app.jar
+
+ENTRYPOINT ["sh", "-c", "java -Xmx256m -XX:+UseSerialGC -Dserver.port=${PORT} -jar app.jar"]
