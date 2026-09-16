@@ -27,6 +27,7 @@ public class ProjectResponse {
         private String type;
         private Integer sortOrder;
         private Boolean hidden;
+        private String color;
         private List<NoteResponse> notes;
     }
 

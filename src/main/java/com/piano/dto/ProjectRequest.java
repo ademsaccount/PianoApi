@@ -21,6 +21,7 @@ public class ProjectRequest {
         private String type;
         private Integer sortOrder;
         private Boolean hidden;
+        private String color;
         private List<NoteDto> notes;
     }
 

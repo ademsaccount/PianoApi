@@ -1,0 +1,1 @@
+ALTER TABLE instruments ADD COLUMN color VARCHAR(7) DEFAULT '#333333';

@@ -135,6 +135,7 @@ public class ProjectService {
                 .type(instReq.getType() != null ? instReq.getType() : "grand")
                 .sortOrder(instReq.getSortOrder() != null ? instReq.getSortOrder() : defaultOrder)
                 .hidden(instReq.getHidden() != null ? instReq.getHidden() : false)
+                .color(instReq.getColor() != null ? instReq.getColor() : "#333333")
                 .notes(new ArrayList<>())
                 .build();
         instrumentRepo.save(instrument);
@@ -182,6 +183,7 @@ public class ProjectService {
                         .type(inst.getType())
                         .sortOrder(inst.getSortOrder())
                         .hidden(inst.getHidden() != null ? inst.getHidden() : false)
+                        .color(inst.getColor() != null ? inst.getColor() : "#333333")
                         .notes(inst.getNotes().stream()
                                 .map(n -> ProjectResponse.NoteResponse.builder()
                                         .id(n.getId())
